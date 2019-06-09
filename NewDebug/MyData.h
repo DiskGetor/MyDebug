@@ -2,6 +2,7 @@
 #define MYDATA_H
 
 #include <Windows.h>
+#include <QString>
 
 // 寄存器在UI中tableWidget的编号
 #define EAXROW 0
@@ -58,9 +59,18 @@ typedef struct
     SIZE_T nSize;
     //断点类型
     int nType;
-    //断点位置
+    //寄存器位置
     int nPostion;
 }HARD_BREAK_POINT;
+
+// 导出函数属性
+typedef struct
+{
+    // 导出函数名字
+    QString FucName;
+    // Dll名字
+    QString DllName;
+}EXPORT_ADDRESS;
 
 // 断点类型枚举
 enum
@@ -70,6 +80,14 @@ enum
     BP_WRITEREAD   //读/写断点
 };
 
+// 选项菜单枚举
+enum
+{
+    UI_CPU,
+    UI_LOG,
+    UI_BPTABEL,
+    UI_DLL
+};
 
 
 #endif // MYDATA_H

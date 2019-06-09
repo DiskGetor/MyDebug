@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1276</width>
-    <height>651</height>
+    <width>1169</width>
+    <height>629</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="0" column="2">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>0</number>
@@ -25,224 +25,238 @@
         <string>CPU</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0">
-         <widget class="QSplitter" name="splitter_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QFrame" name="frame">
-           <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_2">
-            <item row="0" column="0">
-             <widget class="QSplitter" name="splitter">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <widget class="QTableWidget" name="tableWidget_Disassembly">
-               <column>
-                <property name="text">
-                 <string>地址</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>机器码</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>反汇编</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>符号</string>
-                </property>
-               </column>
-              </widget>
-              <widget class="QTableWidget" name="tableWidget_Memory">
-               <property name="showGrid">
-                <bool>true</bool>
-               </property>
-               <property name="columnCount">
-                <number>2</number>
-               </property>
-               <attribute name="horizontalHeaderVisible">
-                <bool>true</bool>
-               </attribute>
-               <attribute name="horizontalHeaderDefaultSectionSize">
-                <number>300</number>
-               </attribute>
-               <column/>
-               <column/>
-              </widget>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QSplitter" name="splitter_3">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <widget class="QFrame" name="frame_2">
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="QSplitter" name="splitter_2">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <widget class="QTableWidget" name="tableWidget_Register">
-                <property name="columnCount">
-                 <number>2</number>
-                </property>
-                <attribute name="horizontalHeaderVisible">
-                 <bool>false</bool>
-                </attribute>
-                <row>
-                 <property name="text">
-                  <string>EAX</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>EBX</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>ECX</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>EDX</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>EBP</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>ESP</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>ESI</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>EDI</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>EIP</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>EFLAG</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>ZF</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>PF</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>AF</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>OF</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>SF</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>DF</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>CF</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>TF</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>IF</string>
-                 </property>
-                </row>
-                <column/>
-                <column/>
-               </widget>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QFrame" name="frame_3">
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_3">
-             <item row="0" column="0">
-              <widget class="QTableWidget" name="tableWidget_Stack"/>
-             </item>
-            </layout>
-           </widget>
-          </widget>
-         </widget>
+        <item row="3" column="0">
+         <widget class="QLineEdit" name="lineEdit_Cmd"/>
         </item>
         <item row="1" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>命令</string>
+           <widget class="QSplitter" name="splitter_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
+            <widget class="QFrame" name="frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="0" column="0">
+               <widget class="QSplitter" name="splitter">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <widget class="QTableWidget" name="tableWidget_Disassembly">
+                 <attribute name="horizontalHeaderCascadingSectionResizes">
+                  <bool>false</bool>
+                 </attribute>
+                 <attribute name="horizontalHeaderDefaultSectionSize">
+                  <number>200</number>
+                 </attribute>
+                 <column>
+                  <property name="text">
+                   <string>地址</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>机器码</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>反汇编</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>符号</string>
+                  </property>
+                 </column>
+                </widget>
+                <widget class="QTableWidget" name="tableWidget_Memory">
+                 <property name="showGrid">
+                  <bool>true</bool>
+                 </property>
+                 <property name="columnCount">
+                  <number>2</number>
+                 </property>
+                 <attribute name="horizontalHeaderVisible">
+                  <bool>false</bool>
+                 </attribute>
+                 <attribute name="horizontalHeaderCascadingSectionResizes">
+                  <bool>false</bool>
+                 </attribute>
+                 <attribute name="horizontalHeaderDefaultSectionSize">
+                  <number>300</number>
+                 </attribute>
+                 <column/>
+                 <column/>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QSplitter" name="splitter_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <widget class="QFrame" name="frame_2">
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <widget class="QSplitter" name="splitter_2">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <widget class="QTableWidget" name="tableWidget_Register">
+                  <property name="maximumSize">
+                   <size>
+                    <width>596</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="columnCount">
+                   <number>2</number>
+                  </property>
+                  <attribute name="horizontalHeaderVisible">
+                   <bool>false</bool>
+                  </attribute>
+                  <row>
+                   <property name="text">
+                    <string>EAX</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>EBX</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>ECX</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>EDX</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>EBP</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>ESP</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>ESI</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>EDI</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>EIP</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>EFLAG</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>ZF</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>PF</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>AF</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>OF</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>SF</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>DF</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>CF</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>TF</string>
+                   </property>
+                  </row>
+                  <row>
+                   <property name="text">
+                    <string>IF</string>
+                   </property>
+                  </row>
+                  <column/>
+                  <column/>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QFrame" name="frame_3">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <item row="0" column="0">
+                <widget class="QTableWidget" name="tableWidget_Stack"/>
+               </item>
+              </layout>
+             </widget>
+            </widget>
            </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineEdit_Cmd"/>
           </item>
          </layout>
         </item>
@@ -264,20 +278,66 @@
            <number>0</number>
           </property>
           <property name="columnCount">
-           <number>2</number>
+           <number>3</number>
           </property>
-          <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
           <attribute name="horizontalHeaderCascadingSectionResizes">
-           <bool>false</bool>
+           <bool>true</bool>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>300</number>
+           <number>200</number>
           </attribute>
           <column>
            <property name="text">
             <string>类型</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>地址</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>长度</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>DLL</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="1">
+         <widget class="QTableWidget" name="tableWidget_FUC">
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>200</number>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>函数名称</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>地址</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_DLL">
+          <property name="columnCount">
+           <number>2</number>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>200</number>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>DLL名称</string>
            </property>
           </column>
           <column>
@@ -298,7 +358,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1276</width>
+     <width>1169</width>
      <height>22</height>
     </rect>
    </property>

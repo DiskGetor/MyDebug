@@ -119,6 +119,12 @@ BOOL CBreakPoint::RestoreMemBeakPoint(HANDLE hProcess, DWORD address)
 
 BOOL CBreakPoint::SetHardBreakPoint(DWORD address, DWORD ThreadId, int nPostion,int nType, int nLength)
 {
+    // 如果寄存器编号不对 返回错误
+    if(nPostion > 4)
+    {
+        return FALSE;
+    }
+
     // 如果长度不对 直接返回错误
     if(!(nLength == 1 || nLength == 2 || nLength == 4))
     {
@@ -149,8 +155,8 @@ BOOL CBreakPoint::SetHardBreakPoint(DWORD address, DWORD ThreadId, int nPostion,
         return FALSE;
     }
 
-    OutputDebugStringA(QString::number(context.Dr7, 16).toLocal8Bit());
-    OutputDebugStringA(QString::number(context.Dr1, 16).toLocal8Bit());
+    //OutputDebugStringA(QString::number(context.Dr7, 16).toLocal8Bit());
+    //OutputDebugStringA(QString::number(context.Dr1, 16).toLocal8Bit());
     if(!SetThreadContext(hThread, &context))
     {
         OutputDebugStringA("SetHardBeakPoint->SetThreadContext Error");
@@ -160,7 +166,6 @@ BOOL CBreakPoint::SetHardBreakPoint(DWORD address, DWORD ThreadId, int nPostion,
     }
 
     CloseHandle(hThread);
-
     return TRUE;
 }
 
@@ -431,6 +436,7 @@ BOOL CBreakPoint::RestoreHardBreakPoint(DWORD address, DWORD ThreadId, int nPost
         return FALSE;
     }
 
+    // 对应的寄存器
     switch (nPostion)
     {
     case 0:

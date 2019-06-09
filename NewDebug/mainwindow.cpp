@@ -143,6 +143,122 @@ void MainWindow::SignBreakPoint()
 
 }
 
+void MainWindow::TransformRelAddress(unsigned int nAddress,QString Hex, QString &Disassembly)
+{
+
+    if(Hex != "e8" && Hex !="eb" && Hex != "74"&& Hex != "75" &&
+       Hex != "e9")
+    {
+        return;
+    }
+
+    auto qstrlist = Disassembly.split('x');
+
+    nAddress += qstrlist.at(1).toLongLong(nullptr,16);
+
+    Disassembly = qstrlist.at(0);
+    Disassembly += 'x';
+    Disassembly += QString::number(nAddress,16);
+}
+
+void MainWindow::BreakPointTable()
+{
+    // 清空表重新遍历
+    ui->tableWidget_BpTable->setRowCount(0);
+
+    // 遍历CC断点表
+    auto ccBreak = m_pDebugThread->m_pCBreakPoint->m_pBpMap;
+    for (auto it = ccBreak->begin(); it != ccBreak->end(); ++it)
+    {
+        // 插入一行
+        ui->tableWidget_BpTable->insertRow(ui->tableWidget_BpTable->rowCount());
+
+        // 填类型
+        ui->tableWidget_BpTable->setItem(ui->tableWidget_BpTable->rowCount() - 1, 0, new QTableWidgetItem(QString::fromLocal8Bit("cc断点")));
+        // 填地址
+        ui->tableWidget_BpTable->setItem(ui->tableWidget_BpTable->rowCount() - 1, 1, new QTableWidgetItem(QString::number(it.value().address,16)));
+    }
+
+    // 遍历内存断点表
+    auto MemBreak = m_pDebugThread->m_pCBreakPoint->m_pMemBpMap;
+    for (auto it = MemBreak->begin(); it != MemBreak->end(); ++it)
+
+    {   // 插入一行
+        ui->tableWidget_BpTable->insertRow(ui->tableWidget_BpTable->rowCount());
+        // 填类型
+        // 填类型
+        QString Type = QString::fromLocal8Bit("硬件");
+
+        // 填类型
+        ui->tableWidget_BpTable->setItem(ui->tableWidget_BpTable->rowCount() - 1, 0, new QTableWidgetItem(QString::fromLocal8Bit("内存断点")));
+        // 填地址
+        ui->tableWidget_BpTable->setItem(ui->tableWidget_BpTable->rowCount() - 1, 1, new QTableWidgetItem(QString::number(it.value().address,16)));
+    }
+
+    // 遍历硬件断点表
+    auto hardBreak = m_pDebugThread->m_pCBreakPoint->m_HardBpAry;
+    for(int i = 0; i < 4; ++i)
+    {
+       if(0 != hardBreak[i].address)
+       {
+           // 插入一行
+           ui->tableWidget_BpTable->insertRow(ui->tableWidget_BpTable->rowCount());
+
+           // 填类型
+           QString Type = QString::fromLocal8Bit("硬件");
+           switch (hardBreak[i].nType)
+           {
+           case BP_WRITE:
+               Type += QString::fromLocal8Bit("写入断点");
+               break;
+           case BP_EXECUTION:
+               Type += QString::fromLocal8Bit("执行断点");
+               break;
+           case BP_WRITEREAD:
+               Type += QString::fromLocal8Bit("读写断点");
+               break;
+           }
+           ui->tableWidget_BpTable->setItem(ui->tableWidget_BpTable->rowCount() - 1, 0, new QTableWidgetItem(Type));
+
+           // 填地址
+           ui->tableWidget_BpTable->setItem(ui->tableWidget_BpTable->rowCount() - 1, 1, new QTableWidgetItem(QString::number(hardBreak[i].address,16)));
+
+           // 填长度
+           ui->tableWidget_BpTable->setItem(ui->tableWidget_BpTable->rowCount() - 1, 2, new QTableWidgetItem(QString::number(hardBreak[i].nSize)));
+       }
+    }
+
+}
+
+void MainWindow::LoadDllTable()
+{
+    ui->tableWidget_DLL->setRowCount(0);
+
+    // 遍历DLLMap
+    auto it = m_pDebugThread->m_pDllMap->begin();
+    for( ; it != m_pDebugThread->m_pDllMap->end(); ++it)
+    {
+        // 加一行
+        ui->tableWidget_DLL->insertRow(ui->tableWidget_DLL->rowCount());
+
+        ui->tableWidget_DLL->setItem(ui->tableWidget_DLL->rowCount() - 1,0,new QTableWidgetItem(it.value()));
+        ui->tableWidget_DLL->setItem(ui->tableWidget_DLL->rowCount() - 1,1,new QTableWidgetItem(QString::number(it.key(),16)));
+    }
+}
+
+bool MainWindow::FindFucName(DWORD Address ,QString &FucName)
+{
+    // 查找函数
+    auto it = m_pDebugThread->m_pFucNameMap->find(Address);
+    if(it != m_pDebugThread->m_pFucNameMap->end())
+    {
+        FucName = it.value().FucName;
+        return true;
+    }
+
+    return false;
+}
+
 void MainWindow::on_lineEdit_Cmd_editingFinished()
 {
     // 空数据不发送
@@ -186,8 +302,6 @@ void MainWindow::on_lineEdit_Cmd_editingFinished()
         ui->tableWidget_Disassembly->setRowCount(0);
     }
 
-
-
     // 发送Cmd输入的文本到Debug线程
     emit sigCmdMessage(ui->lineEdit_Cmd->text());
     // 清空文本框
@@ -217,11 +331,31 @@ void MainWindow::sltDisAssemblyData(unsigned int nAddress, QString qstrHex, QStr
         return;
     }
 
+    // 转换相对地址
+    TransformRelAddress(nAddress,qstrHex.mid(0,2),qstrData);
+
     ui->tableWidget_Disassembly->insertRow(nRow);
     ui->tableWidget_Disassembly->setItem(nRow,0,new QTableWidgetItem(QString("0x%1").arg(uint(nAddress), 8, 16, QLatin1Char('0'))));
     ui->tableWidget_Disassembly->setItem(nRow,1,new QTableWidgetItem(qstrHex));
     ui->tableWidget_Disassembly->setItem(nRow,2,new QTableWidgetItem(qstrData));
 
+    QString Temp;
+    if(FindFucName(nAddress, Temp))
+    {
+        ui->tableWidget_Disassembly->setItem(nRow,0,new QTableWidgetItem(Temp));
+    }
+
+    if(qstrData.contains("call"))
+    {
+        auto qstrlist = qstrData.split('x');
+        if(FindFucName(qstrlist.at(1).toUInt(nullptr,16), Temp))
+        {
+            ui->tableWidget_Disassembly->setItem(nRow,3,new QTableWidgetItem(Temp));
+        }
+
+    }
+
+    //标记断点
     SignBreakPoint();
 }
 
@@ -250,5 +384,18 @@ void MainWindow::sltMemInfo(QByteArray qbtaMem, unsigned int nLength, unsigned i
         ui->tableWidget_Memory->insertRow(i);
         ui->tableWidget_Memory->setItem(i,0,new QTableWidgetItem(QString::number(nAddress, 16)));
         ui->tableWidget_Memory->setItem(i,1,new QTableWidgetItem(qstrHex.mid(0,nRemain * 3)));
+    }
+}
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{
+    switch (index)
+    {
+    case UI_BPTABEL:
+        BreakPointTable();
+        break;
+    case UI_DLL:
+        LoadDllTable();
+        break;
     }
 }

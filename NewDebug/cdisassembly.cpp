@@ -53,6 +53,7 @@ int CDisassembly::StartDisassembly(IN HANDLE hProcess,IN DWORD Eip, IN DWORD nLe
 
         // Format & print the binary instruction structure to human readable format
         char buffer[256];
+
         ZydisFormatterFormatInstruction(&formatter, &instruction, buffer, sizeof(buffer));
 
         QString qstrDis = QString::fromLocal8Bit(buffer);

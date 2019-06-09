@@ -123,6 +123,10 @@ public:
     CBreakPoint *m_pCBreakPoint = new CBreakPoint;
     // 内存读取类
     CMemory *m_pCMemory = new CMemory;
+    // DLL导出函数 地址为键  存函数名称
+    QMap<DWORD, EXPORT_ADDRESS> *m_pFucNameMap = new QMap<DWORD, EXPORT_ADDRESS>;
+    // DLL导出函数 Dll载入首地址为键 存DLL名字
+    QMap<DWORD,QString> *m_pDllMap = new QMap<DWORD,QString>;
 };
 
 #endif // CDEBUGTHREAD_H
